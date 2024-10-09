@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  template-express:
+    container_name: template-express
+    build: .
+    command: npm run start
+    env_file: .env
+    restart: always
+    ports:
+      - "${APP_PORT}:3000"
+    volumes:
+      - ./:/usr/app
+      - /usr/app/node_modules
+    networks:
+      - traefik-network
+networks:
+  traefik-network:
+    external: true
